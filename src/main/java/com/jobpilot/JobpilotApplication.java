@@ -1,4 +1,4 @@
-package com.jobpilot.jobpilot;
+package com.jobpilot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
