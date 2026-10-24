@@ -8,6 +8,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.jobpilot.auth.InvalidCredentialsException;
+
 
 @ControllerAdvice 
 public class ApiExceptionHandler {
@@ -24,4 +26,11 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorBody("VALIDATION_ERROR","Request validation failed", details));
         
     }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+public ResponseEntity<ErrorBody> handleInvalidCredentials(InvalidCredentialsException ex) {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+        .body(new ErrorBody("INVALID_CREDENTIALS", ex.getMessage(), List.of()));
+}
+
 }
